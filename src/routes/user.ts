@@ -24,9 +24,9 @@ export async function userRoutes(app: FastifyInstance) {
     //@ts-ignore
     console.log(request.body.customer)
     //@ts-ignore
-    console.log(JSON.parse(request.body.customer))
+    email = request.body.customer.email
     //@ts-ignore
-    const user = await propertyRepository.create(request.body.customer.email)
+    const user = await propertyRepository.create(email)
 
     return reply.status(201).send(user)
   })
