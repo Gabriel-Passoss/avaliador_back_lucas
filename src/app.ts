@@ -7,6 +7,7 @@ export const app = fastify({
 })
 
 app.register(userRoutes)
+
 app.register(cors, {
   origin: '*'
 });
