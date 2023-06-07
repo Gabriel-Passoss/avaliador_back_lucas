@@ -8,10 +8,10 @@ interface CreateUser {
 
 class PropertyRepository {
   // function to create a product
-  async create(data: CreateUser) {
+  async create(email: string) {
     const user = await prisma.user.create({
       data: {
-        email: data.email
+        email
       }
     })
 
