@@ -6,12 +6,7 @@
   "scripts": {
     "build": "tsup src",
     "start": "node dist/server.js",
-    "dev": "tsx watch ./src/server.ts",
-    "migrate:test": "dotenv -e .env.test -- npx prisma migrate deploy",
-    "docker:up": "docker-compose up -d",
-    "docker:down": "docker-compose down",
-    "test": "npm run docker:up && dotenv -e .env.test prisma migrate deploy && dotenv -e .env.test vitest",
-    "dbtest": "dotenv -e .env.test prisma studio"
+    "dev": "tsx watch ./src/server.ts"
   },
   "keywords": [],
   "author": "",
