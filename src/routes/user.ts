@@ -22,8 +22,7 @@ export async function userRoutes(app: FastifyInstance) {
   // Cria um imóvel 
   app.post('/user',  async (request, reply) => {
     //@ts-ignore
-    const data = createUserSchema.parse(request.body)
-    const user = await propertyRepository.create(data)
+    const user = await propertyRepository.create(request.body.customer.email)
 
     return reply.status(201).send(user)
   })
