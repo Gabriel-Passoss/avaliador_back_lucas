@@ -27,6 +27,12 @@ class PropertyRepository {
 
     return user
   }
+
+  async findAll() {
+    const user = await prisma.user.findMany()
+
+    return user
+  }
 }
 
 export { PropertyRepository }
