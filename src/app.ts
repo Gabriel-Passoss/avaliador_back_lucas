@@ -7,3 +7,4 @@ export const app = fastify({
 })
 
 app.register(userRoutes)
+app.register(require('fastify-json-body-parser'));
