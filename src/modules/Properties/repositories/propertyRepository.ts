@@ -33,6 +33,17 @@ class PropertyRepository {
 
     return user
   }
+
+  async markAsPremium(email: string) {
+    await prisma.user.update({
+      where: {
+        email: email
+      },
+      data: {
+        isPremium: true
+      }
+    })
+  }
 }
 
 export { PropertyRepository }
