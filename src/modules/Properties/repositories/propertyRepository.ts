@@ -35,7 +35,7 @@ class PropertyRepository {
   }
 
   async markAsPremium(email: string) {
-    await prisma.user.update({
+    await prisma.user.updateMany({
       where: {
         email: email
       },

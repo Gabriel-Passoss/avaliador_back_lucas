@@ -12,6 +12,6 @@ datasource db {
 
 model User {
   id        String  @id @default(uuid())
-  email     String  @unique
+  email     String
   isPremium Boolean @default(false)
 }
