@@ -35,7 +35,7 @@ export async function userRoutes(app: FastifyInstance) {
 
   app.post('/user/premium', async (request,reply) => {
     //@ts-ignore
-    const email = request.body.customer.email
+    const email = request.body.email
     const user = await propertyRepository.markAsPremium(email)
 
     return reply.status(201).send(user)
