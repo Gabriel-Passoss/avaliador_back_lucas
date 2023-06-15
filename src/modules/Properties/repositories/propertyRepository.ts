@@ -3,15 +3,15 @@ import { PrismaClient } from '@prisma/client'
 export const prisma = new PrismaClient()
 
 interface CreateUser {
-  email: string
+  cpf: string
 }
 
 class PropertyRepository {
   // function to create a product
-  async create(email: string) {
+  async create(cpf: string) {
     const user = await prisma.user.create({
       data: {
-        email
+        cpf: cpf
       }
     })
 
@@ -21,7 +21,7 @@ class PropertyRepository {
   async findByEmail(data: CreateUser) {
     const user = prisma.user.findFirst({
       where: {
-        email: data.email
+        cpf: data.cpf
       }
     })
 
@@ -34,10 +34,10 @@ class PropertyRepository {
     return user
   }
 
-  async markAsPremium(email: string) {
+  async markAsPremium(cpf: string) {
     await prisma.user.updateMany({
       where: {
-        email: email
+        cpf
       },
       data: {
         isPremium: true

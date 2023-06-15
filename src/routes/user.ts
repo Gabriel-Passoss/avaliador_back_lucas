@@ -6,7 +6,7 @@ import { PropertyRepository } from "../modules/Properties/repositories/propertyR
 const propertyRepository = new PropertyRepository()
 
 const createUserSchema = z.object({
-  email: z.string()
+  cpf: z.string()
 })
 
 
@@ -20,10 +20,9 @@ export async function userRoutes(app: FastifyInstance) {
 
   app.post('/user',  async (request, reply) => {
     //@ts-ignore
-    console.log(request.body.customer.email)
+    const cpf = request.body.customer.identification_number
     //@ts-ignore
-    const email = request.body.customer.email
-    const user = await propertyRepository.create(email)
+    const user = await propertyRepository.create(cpf)
 
     return reply.status(201).send(user)
   })
@@ -35,8 +34,8 @@ export async function userRoutes(app: FastifyInstance) {
 
   app.post('/user/premium', async (request,reply) => {
     //@ts-ignore
-    const email = request.body.customer.email
-    const user = await propertyRepository.markAsPremium(email)
+    const cpf = request.body.customer.identification_number
+    const user = await propertyRepository.markAsPremium(cpf)
 
     return reply.status(201).send(user)
   })
