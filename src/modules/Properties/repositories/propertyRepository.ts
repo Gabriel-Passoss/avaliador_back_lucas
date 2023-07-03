@@ -44,6 +44,17 @@ class PropertyRepository {
       }
     })
   }
+
+  async markCupom(cpf: string) {
+    await prisma.user.updateMany({
+      where: {
+        cpf
+      },
+      data: {
+        boughtCupom: true
+      }
+    })
+  }
 }
 
 export { PropertyRepository }

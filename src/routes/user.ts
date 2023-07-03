@@ -39,4 +39,12 @@ export async function userRoutes(app: FastifyInstance) {
 
     return reply.status(201).send(user)
   })
+
+  app.post('/user/cupom', async (request,reply) => {
+    //@ts-ignore
+    const cpf = request.body.customer.identification_number
+    const user = await propertyRepository.markCupom(cpf)
+
+    return reply.status(201).send(user)
+  })
 }

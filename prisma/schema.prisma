@@ -11,8 +11,9 @@ datasource db {
 }
 
 model User {
-  id        String  @id @default(uuid())
-  email     String?
-  cpf       String
-  isPremium Boolean @default(false)
+  id          String  @id @default(uuid())
+  email       String?
+  cpf         String
+  isPremium   Boolean @default(false)
+  boughtCupom Boolean @default(false)
 }
