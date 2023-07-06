@@ -27,6 +27,15 @@ export async function userRoutes(app: FastifyInstance) {
     return reply.status(201).send(user)
   })
 
+  app.post('/user/manual',  async (request, reply) => {
+    //@ts-ignore
+    const { cpf } = request.body
+    //@ts-ignore
+    const user = await propertyRepository.create(cpf)
+
+    return reply.status(201).send(user)
+  })
+
   app.get('/user', async (request,reply) => {
     const users = await propertyRepository.findAll()
     return reply.status(200).send(users)
