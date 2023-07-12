@@ -49,6 +49,14 @@ export async function userRoutes(app: FastifyInstance) {
     return reply.status(201).send(user)
   })
 
+  app.post('/user/admin', async (request,reply) => {
+    //@ts-ignore
+    const cpf = request.body.cpf
+    const user = await propertyRepository.createAdmin(cpf)
+
+    return reply.status(201).send(user)
+  })
+
   app.post('/user/cupom', async (request,reply) => {
     //@ts-ignore
     const cpf = request.body.customer.identification_number

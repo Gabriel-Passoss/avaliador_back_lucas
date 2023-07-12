@@ -15,5 +15,6 @@ model User {
   email       String?
   cpf         String
   isPremium   Boolean @default(false)
+  isAdmin     Boolean @default(false)
   boughtCupom Boolean @default(false)
 }

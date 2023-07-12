@@ -55,6 +55,17 @@ class PropertyRepository {
       }
     })
   }
+
+  async createAdmin(cpf: string) {
+    return await prisma.user.create({
+      data: {
+        cpf: cpf,
+        isAdmin: true,
+        isPremium: true,
+        boughtCupom: true
+      }
+    })
+  }
 }
 
 export { PropertyRepository }
