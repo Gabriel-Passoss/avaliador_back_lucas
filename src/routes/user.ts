@@ -15,6 +15,11 @@ export async function userRoutes(app: FastifyInstance) {
     //@ts-ignore
     const data = createUserSchema.parse(request.body)
     const user = await propertyRepository.findByEmail(data)
+
+    if (!user) {
+      return reply.status(404).send()
+    }
+    
     return reply.status(200).send(user)
   })
 
