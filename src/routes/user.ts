@@ -1,4 +1,4 @@
-import { FastifyInstance } from "fastify";
+import { FastifyInstance, FastifyRequest } from "fastify";
 import { z } from "zod";
 
 import { PropertyRepository } from "../modules/Properties/repositories/propertyRepository";
@@ -23,24 +23,24 @@ export async function userRoutes(app: FastifyInstance) {
     return reply.status(200).send(user)
   })
 
-  app.post('/user',  async (request, reply) => {
+  app.post('/user',  async (request: FastifyRequest, reply) => {
     //@ts-ignore
     const cpf = request.body.customer.identification_number
 
     if(!cpf) {
+      //@ts-ignore
+      console.log(request.body.customer)
       return reply.status(400).send({message: 'CPF invalid or not exists'})
     }
-    //@ts-ignore
+
     const user = await propertyRepository.create(cpf)
 
     return reply.status(201).send(user)
   })
 
   app.post('/user/pepper',  async (request, reply) => {
-    //@ts-ignore
     const cpf = request.body
     console.log(cpf)
-    //@ts-ignore
     // const user = await propertyRepository.create(cpf)
 
     return reply.status(201).send(cpf)
