@@ -26,8 +26,7 @@ export async function userRoutes(app: FastifyInstance) {
   app.post('/user',  async (request: FastifyRequest, reply) => {
     //@ts-ignore
     const cpf = request.body.customer.identification_number
-
-    console.log(request.body)
+    
     if(!cpf) {
       //@ts-ignore
       return reply.status(400).send({message: 'CPF invalid or not exists'})

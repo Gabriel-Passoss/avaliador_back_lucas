@@ -3,7 +3,7 @@ import cors from '@fastify/cors'
 import { userRoutes } from './routes/user'
 
 export const app = fastify({
-  logger: true
+  logger: false
 })
 
 app.register(userRoutes)
