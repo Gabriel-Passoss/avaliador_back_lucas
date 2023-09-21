@@ -41,14 +41,6 @@ export async function userRoutes(app: FastifyInstance) {
     return reply.status(201).send(user)
   })
 
-  app.post('/user/pepper',  async (request, reply) => {
-    const cpf = request.body
-    console.log(cpf)
-    // const user = await propertyRepository.create(cpf)
-
-    return reply.status(201).send(cpf)
-  })
-
   app.post('/user/manual',  async (request, reply) => {
     //@ts-ignore
     const { cpf } = request.body
@@ -65,7 +57,13 @@ export async function userRoutes(app: FastifyInstance) {
 
   app.post('/user/premium', async (request,reply) => {
     //@ts-ignore
-    const cpf = request.body.customer.identification_number
+    var cpf = request.body.customer.identification_number
+
+    if(!cpf) {
+      //@ts-ignore
+      cpf =  request.body.doc
+    }
+
     const user = await propertyRepository.markAsPremium(cpf)
 
     return reply.status(201).send(user)
@@ -80,8 +78,14 @@ export async function userRoutes(app: FastifyInstance) {
   })
 
   app.post('/user/cupom', async (request,reply) => {
-    //@ts-ignore
-    const cpf = request.body.customer.identification_number
+   //@ts-ignore
+   var cpf = request.body.customer.identification_number
+
+   if(!cpf) {
+     //@ts-ignore
+     cpf =  request.body.doc
+   }
+
     const user = await propertyRepository.markCupom(cpf)
 
     return reply.status(201).send(user)
