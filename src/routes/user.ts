@@ -26,11 +26,6 @@ export async function userRoutes(app: FastifyInstance) {
   app.post('/user',  async (request: FastifyRequest, reply) => {
     //@ts-ignore
     var cpf = request.body.customer.identification_number
-    
-    if(!cpf) {
-      //@ts-ignore
-      cpf =  request.body.doc
-    }
 
     if(!cpf) {
       return reply.status(400).send({message: 'CPF invalid or not exists'})
@@ -59,11 +54,6 @@ export async function userRoutes(app: FastifyInstance) {
     //@ts-ignore
     var cpf = request.body.customer.identification_number
 
-    if(!cpf) {
-      //@ts-ignore
-      cpf =  request.body.doc
-    }
-
     const user = await propertyRepository.markAsPremium(cpf)
 
     return reply.status(201).send(user)
@@ -81,12 +71,52 @@ export async function userRoutes(app: FastifyInstance) {
    //@ts-ignore
    var cpf = request.body.customer.identification_number
 
-   if(!cpf) {
-     //@ts-ignore
-     cpf =  request.body.doc
-   }
-
     const user = await propertyRepository.markCupom(cpf)
+
+    return reply.status(201).send(user)
+  })
+
+  app.post('/user/pepper',  async (request: FastifyRequest, reply) => {
+    //@ts-ignore
+    var cpf = request.body.doc
+
+    const cpfFiltrado = cpf.replaceAll('.', '').replaceAll('-', '')
+
+    if(!cpf) {
+      return reply.status(400).send({message: 'CPF invalid or not exists'})
+    }
+
+    const user = await propertyRepository.create(cpfFiltrado)
+
+    return reply.status(201).send(user)
+  })
+
+  app.post('/user/premium/pepper',  async (request: FastifyRequest, reply) => {
+    //@ts-ignore
+    var cpf = request.body.doc
+
+    const cpfFiltrado = cpf.replaceAll('.', '').replaceAll('-', '')
+
+    if(!cpf) {
+      return reply.status(400).send({message: 'CPF invalid or not exists'})
+    }
+
+    const user = await propertyRepository.markAsPremium(cpfFiltrado)
+
+    return reply.status(201).send(user)
+  })
+
+  app.post('/user/cupom/pepper',  async (request: FastifyRequest, reply) => {
+    //@ts-ignore
+    var cpf = request.body.doc
+
+    const cpfFiltrado = cpf.replaceAll('.', '').replaceAll('-', '')
+
+    if(!cpf) {
+      return reply.status(400).send({message: 'CPF invalid or not exists'})
+    }
+
+    const user = await propertyRepository.markCupom(cpfFiltrado)
 
     return reply.status(201).send(user)
   })
